@@ -1,0 +1,26 @@
+.card{
+    background-color: #222222;
+    max-width: 20em;
+    flex: 1 0 auto;
+    border-radius: 1rem;
+    &:hover{
+        cursor: pointer;
+    }
+    &__img-container{
+        img{
+            width:100%;
+            border-top-left-radius: 1rem;
+            border-top-right-radius: 1rem;
+        }
+    }
+    &__info{
+        padding: 1rem;
+        .card__name{
+            
+        }
+    }
+    &:last-child{
+        
+    }
+
+}
