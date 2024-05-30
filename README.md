@@ -1,6 +1,8 @@
 # Elden Memory Game
 A simple memory game project from Odin Project.
 
+# Link
+https://lysabrina.github.io/elden-memory-game/ 
 # Todos
 1) Add card animations
 
