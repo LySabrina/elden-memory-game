@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+
 import "./App.css";
-import Card from "./components/Card.jsx";
+
 import Header from "./components/Header.jsx";
 import CardDeck from "./components/CardDeck.jsx";
 import victory from "./assets/victory.mp3";
 import failed from "./assets/death.mp3";
 import Message from "./components/Message.jsx";
+
 function App() {
   /**
    * Originally, these two states were inside the Scoreboard
@@ -17,16 +17,19 @@ function App() {
    */
   const [cardsClicked, setCardsClicked] = useState([]);
   const [bestScore, setBestScore] = useState(0);
+  const [gameMessage, setGameMessage] = useState("YOU FAILED");
+  const [showMesage, setShowMessage] = useState(false);
 
   useEffect(() => {
-    if (cardsClicked.length == 1) {
+    if (cardsClicked.length == 12) {
       const audio = new Audio(victory);
       audio.play();
-
-      setTimeout(() => {
-        console.log("did it");
-      }, 8000);
+      setGameMessage("VICTORY");
+      setShowMessage(true);
     }
+    setTimeout(() => {
+      setShowMessage(false);
+    }, 10000);
   }, [cardsClicked]);
 
   function checkAlreadyClicked(id) {
@@ -34,6 +37,8 @@ function App() {
       if (cardsClicked.length > bestScore) {
         setBestScore(cardsClicked.length);
       }
+      setGameMessage("YOU FAILED");
+      setShowMessage(true);
       const death = new Audio(failed);
       death.play();
 
@@ -48,7 +53,8 @@ function App() {
   }
   return (
     <>
-      <Message />
+      {showMesage && <Message message={gameMessage} />}
+
       <Header cardsClicked={cardsClicked} bestScore={bestScore} />
       <CardDeck checkAlreadyClicked={checkAlreadyClicked} />
     </>
